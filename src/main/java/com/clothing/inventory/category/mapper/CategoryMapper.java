@@ -17,10 +17,6 @@ public class CategoryMapper {
 
         category.setName(dto.getName());
         category.setDescription(dto.getDescription());
-        category.setCreatedAt(LocalDateTime.now());
-        category.setUpdatedAt(LocalDateTime.now());
-        category.setDeleted(false);
-
         return category;
     }
 
@@ -41,8 +37,7 @@ public class CategoryMapper {
     public void updateEntity(UpdateCategoryRequestDto dto, Category category) {
 
         category.setName(dto.getName());
-        category.setDescription((dto.getDescription()));
-        category.setUpdatedAt(LocalDateTime.now());
+        category.setDescription(dto.getDescription());
 
     }
 }

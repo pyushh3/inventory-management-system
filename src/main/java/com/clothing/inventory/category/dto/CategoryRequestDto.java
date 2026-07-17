@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class CategoryRequestDto {
 
-    private Long Id;
+    private Long id;
 
     @NotBlank(message = "Name Cannot Ee Blank")
     private String name;
@@ -20,11 +20,11 @@ public class CategoryRequestDto {
 
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public String getName() {
