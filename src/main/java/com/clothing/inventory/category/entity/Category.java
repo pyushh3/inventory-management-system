@@ -1,9 +1,6 @@
 package com.clothing.inventory.category.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +11,9 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Column(nullable = false, unique = true)
     private String name;
+    @Column(length = 500)
     private String description;
     private Boolean deleted;
     private LocalDateTime createdAt;

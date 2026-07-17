@@ -105,7 +105,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         categoryToSave.setDeleted(true);
 
-       cr.save(categoryToSave);
+        cr.save(categoryToSave);
 
 
     }
