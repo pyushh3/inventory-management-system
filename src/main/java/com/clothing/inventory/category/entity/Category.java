@@ -1,5 +1,6 @@
 package com.clothing.inventory.category.entity;
 
+import com.clothing.inventory.category.enums.CategoryStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,10 @@ public class Category {
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CategoryStatus status;
+
 
 
     public Long getId() {
@@ -64,11 +69,21 @@ public class Category {
         return updatedAt;
     }
 
+    public CategoryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CategoryStatus status) {
+        this.status = status;
+    }
+
     @PrePersist
     public void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
         deleted = false;
+
+        status = CategoryStatus.INACTIVE;
     }
 
     @PreUpdate

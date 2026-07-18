@@ -27,6 +27,7 @@ public class CategoryMapper {
         responseDto.setName(category.getName());
         responseDto.setDescription(category.getDescription());
         responseDto.setId(category.getId());
+        responseDto.setStatus(category.getStatus());
 
         return responseDto;
     }

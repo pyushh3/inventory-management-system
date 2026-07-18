@@ -3,6 +3,7 @@ package com.clothing.inventory.category.controller;
 import com.clothing.inventory.category.dto.CategoryRequestDto;
 import com.clothing.inventory.category.dto.CategoryResponseDto;
 import com.clothing.inventory.category.dto.UpdateCategoryRequestDto;
+import com.clothing.inventory.category.enums.CategoryStatus;
 import com.clothing.inventory.category.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -82,4 +83,14 @@ public class CategoryController {
         return ResponseEntity.ok(categories);
     }
 
+    @GetMapping("/status")
+    public ResponseEntity<Page<CategoryResponseDto>> getCategoryByStatus(
+            @RequestParam CategoryStatus status,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        return ResponseEntity.ok(
+                cs.getCategoryByStatus(status, page, size)
+        );
+    }
 }

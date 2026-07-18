@@ -4,6 +4,7 @@ import com.clothing.inventory.category.dto.CategoryRequestDto;
 import com.clothing.inventory.category.dto.CategoryResponseDto;
 import com.clothing.inventory.category.dto.UpdateCategoryRequestDto;
 import com.clothing.inventory.category.entity.Category;
+import com.clothing.inventory.category.enums.CategoryStatus;
 import com.clothing.inventory.category.exception.DuplicateResourceException;
 import com.clothing.inventory.category.exception.ResourceNotFoundException;
 import com.clothing.inventory.category.mapper.CategoryMapper;
@@ -112,6 +113,7 @@ public class CategoryServiceImpl implements CategoryService {
                 new ResourceNotFoundException("Category with id " + id + " not found"));
 
         categoryToSave.setDeleted(true);
+        categoryToSave.setStatus(CategoryStatus.INACTIVE);
 
         cr.save(categoryToSave);
     }
@@ -125,6 +127,17 @@ public class CategoryServiceImpl implements CategoryService {
         return categories.stream()
                 .map(cm::toResponse)
                 .toList();
+    }
+
+    @Override
+    public Page<CategoryResponseDto> getCategoryByStatus(CategoryStatus status, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Category> categoryPage =
+                cr.findByStatusAndDeletedFalse(status, pageable);
+
+        return categoryPage.map(cm::toResponse);
     }
 
     //helper method

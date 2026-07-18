@@ -1,6 +1,7 @@
 package com.clothing.inventory.category.repository;
 
 import com.clothing.inventory.category.entity.Category;
+import com.clothing.inventory.category.enums.CategoryStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,9 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
     boolean existsByNameIgnoreCase(String name);
 
     List<Category>findByDeletedFalseAndNameContainingIgnoreCase(String name);
+
+    Page<Category> findByStatusAndDeletedFalse(
+            CategoryStatus status,
+            Pageable pageable
+    );
 }
