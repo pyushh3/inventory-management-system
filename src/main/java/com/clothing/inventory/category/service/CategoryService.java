@@ -3,6 +3,7 @@ package com.clothing.inventory.category.service;
 import com.clothing.inventory.category.dto.CategoryRequestDto;
 import com.clothing.inventory.category.dto.CategoryResponseDto;
 import com.clothing.inventory.category.dto.UpdateCategoryRequestDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface CategoryService {
 
     CategoryResponseDto getCategoryById(Long id);
 
-    List<CategoryResponseDto> getAllCategories();
+    Page<CategoryResponseDto> getAllCategory(int page, int size);;
 
     CategoryResponseDto updateCategory(Long id,UpdateCategoryRequestDto updateRequestDto);
 

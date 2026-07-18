@@ -9,6 +9,9 @@ import com.clothing.inventory.category.exception.ResourceNotFoundException;
 import com.clothing.inventory.category.mapper.CategoryMapper;
 import com.clothing.inventory.category.repository.CategoryRepo;
 import com.clothing.inventory.category.service.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -63,11 +66,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     //get all categories
     @Override
-    public List<CategoryResponseDto> getAllCategories() {
+    public Page<CategoryResponseDto> getAllCategory(int page, int size) {
 
-        List<Category> categories = cr.findByDeletedFalse();
+        Pageable pageable = PageRequest.of(page, size);
 
-        return categories.stream().map(cm::toResponse).toList();
+        Page<Category> categoryPage = cr.findByDeletedFalse(pageable);
+
+        return categoryPage.map(cm::toResponse);
     }
 
     //update category

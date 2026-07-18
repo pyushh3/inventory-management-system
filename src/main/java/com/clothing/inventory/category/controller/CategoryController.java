@@ -5,6 +5,7 @@ import com.clothing.inventory.category.dto.CategoryResponseDto;
 import com.clothing.inventory.category.dto.UpdateCategoryRequestDto;
 import com.clothing.inventory.category.service.CategoryService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,9 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponseDto>> getAllCategories() {
-        return ResponseEntity.ok(cs.getAllCategories());
+    public ResponseEntity<Page<CategoryResponseDto>> getAllCategories( @RequestParam(defaultValue = "0") int page,
+                                                                       @RequestParam(defaultValue = "3") int size) {
+        return ResponseEntity.ok(cs.getAllCategory(page, size));
     }
 
     @PutMapping("/{id}")
