@@ -24,4 +24,6 @@ public interface CategoryService {
 
     public boolean nameExist(String name);
 
+    List<CategoryResponseDto> searchCategoryByName(String name);
+
 }

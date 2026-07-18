@@ -109,7 +109,17 @@ public class CategoryServiceImpl implements CategoryService {
         categoryToSave.setDeleted(true);
 
         cr.save(categoryToSave);
+    }
 
+    @Override
+    public List<CategoryResponseDto> searchCategoryByName(String name) {
+
+        List<Category> categories =
+                cr.findByDeletedFalseAndNameContainingIgnoreCase(name);
+
+        return categories.stream()
+                .map(cm::toResponse)
+                .toList();
     }
 
     //helper method

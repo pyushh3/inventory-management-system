@@ -3,8 +3,6 @@ package com.clothing.inventory.category.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
-
 public class CategoryRequestDto {
 
     @NotBlank(message = "Name Cannot Ee Blank")

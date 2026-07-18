@@ -70,4 +70,14 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<CategoryResponseDto>> searchCategory(
+            @RequestParam String name) {
+
+        List<CategoryResponseDto> categories =
+                cs.searchCategoryByName(name);
+
+        return ResponseEntity.ok(categories);
+    }
+
 }

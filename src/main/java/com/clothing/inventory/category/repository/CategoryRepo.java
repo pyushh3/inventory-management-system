@@ -11,4 +11,6 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
     List<Category> findByDeletedFalse();
 
     boolean existsByNameIgnoreCase(String name);
+
+    List<Category>findByDeletedFalseAndNameContainingIgnoreCase(String name);
 }
