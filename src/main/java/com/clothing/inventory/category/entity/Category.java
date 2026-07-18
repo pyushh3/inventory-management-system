@@ -83,7 +83,7 @@ public class Category {
         updatedAt = LocalDateTime.now();
         deleted = false;
 
-        status = CategoryStatus.INACTIVE;
+        status = CategoryStatus.ACTIVE;
     }
 
     @PreUpdate
