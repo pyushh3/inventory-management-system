@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/category")
 public class CategoryController {
 
-    private CategoryService cs;
+    private final CategoryService cs;
 
     public CategoryController(CategoryService cs) {
         this.cs = cs;
@@ -69,7 +69,5 @@ public class CategoryController {
         cs.softDelete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-
 
 }

@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
 
+@Entity
+@Table(name = "category")
 public class Category {
 
     @Id
@@ -13,7 +14,7 @@ public class Category {
     private Long id;
     @Column(nullable = false, unique = true, length = 100)
     private String name;
-    @Column(length = 500)
+    @Column(length = 500, nullable = false)
     private String description;
     @Column(nullable = false)
     private Boolean deleted;
@@ -59,16 +60,8 @@ public class Category {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     @PrePersist

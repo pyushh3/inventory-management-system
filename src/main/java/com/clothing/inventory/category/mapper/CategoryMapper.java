@@ -27,9 +27,9 @@ public class CategoryMapper {
         responseDto.setName(category.getName());
         responseDto.setDescription(category.getDescription());
         responseDto.setId(category.getId());
-        responseDto.setCreatedAt(category.getCreatedAt());
-        responseDto.setUpdatedAt(category.getUpdatedAt());
-        responseDto.setDeleted(category.getDeleted());
+//        responseDto.setCreatedAt(category.getCreatedAt());
+//        responseDto.setUpdatedAt(category.getUpdatedAt());
+//        responseDto.setDeleted(category.getDeleted());
 
         return responseDto;
     }

@@ -10,16 +10,14 @@ import com.clothing.inventory.category.mapper.CategoryMapper;
 import com.clothing.inventory.category.repository.CategoryRepo;
 import com.clothing.inventory.category.service.CategoryService;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepo cr;
-    private CategoryMapper cm;
+    private final CategoryRepo cr;
+    private final CategoryMapper cm;
 
     //dependency injection
     public CategoryServiceImpl(CategoryRepo cr, CategoryMapper cm) {
@@ -33,7 +31,8 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponseDto createCategory(CategoryRequestDto requestDto) {
 
         if(nameExist(requestDto.getName())) {
-            throw new DuplicateResourceException("category with name " + requestDto.getName() + " already exists");
+            throw new DuplicateResourceException
+                    ("category with name " + requestDto.getName() + " already exists");
         }
 
         Category category = cm.toEntity(requestDto); //dto to entity mapping
@@ -55,7 +54,8 @@ public class CategoryServiceImpl implements CategoryService {
 //        Category category = optionalCategory.get();
 //        return cm.toResponse(category);
 
-        Category category = cr.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category with id " + id + " not found"));
+        Category category = cr.findByIdAndDeletedFalse(id).orElseThrow(() ->
+                new ResourceNotFoundException("Category with id " + id + " not found"));
 
         return cm.toResponse(category);
     }
@@ -82,7 +82,8 @@ public class CategoryServiceImpl implements CategoryService {
 //
 //        Category category = optionalCategory.get();
 
-        Category category = cr.findByIdAndDeletedFalse(id).orElseThrow(() -> new ResourceNotFoundException("Category with id " + id + " not found"));
+        Category category = cr.findByIdAndDeletedFalse(id).orElseThrow(() ->
+                new ResourceNotFoundException("Category with id " + id + " not found"));
 
         cm.updateEntity(updateReq, category);
 
@@ -92,7 +93,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     // hard delete
     public void deleteCategory(Long id) {
-        Category category = cr.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category with id " + id + " not found"));
+        Category category = cr.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Category with id " + id + " not found"));
 
         cr.delete(category);
     }
@@ -101,12 +103,12 @@ public class CategoryServiceImpl implements CategoryService {
     public void softDelete(Long id) {
 
 
-        Category categoryToSave = cr.findByIdAndDeletedFalse(id).orElseThrow(()-> new ResourceNotFoundException("Category with id " + id + " not found"));
+        Category categoryToSave = cr.findByIdAndDeletedFalse(id).orElseThrow(()->
+                new ResourceNotFoundException("Category with id " + id + " not found"));
 
         categoryToSave.setDeleted(true);
 
         cr.save(categoryToSave);
-
 
     }
 
