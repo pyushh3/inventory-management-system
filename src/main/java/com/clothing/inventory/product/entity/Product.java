@@ -2,8 +2,6 @@ package com.clothing.inventory.product.entity;
 
 import com.clothing.inventory.category.entity.Category;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

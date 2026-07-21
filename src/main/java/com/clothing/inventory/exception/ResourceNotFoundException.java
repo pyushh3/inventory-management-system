@@ -1,4 +1,4 @@
-package com.clothing.inventory.category.exception;
+package com.clothing.inventory.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 
