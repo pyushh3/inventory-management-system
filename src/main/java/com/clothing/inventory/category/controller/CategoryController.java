@@ -34,10 +34,6 @@ public class CategoryController {
 
         CategoryResponseDto categoryResp = cs.getCategoryById(id);
 
-//        if(categoryResp == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-
         return ResponseEntity.ok(categoryResp);
     }
 
@@ -52,10 +48,6 @@ public class CategoryController {
 
         CategoryResponseDto updateResp = cs.updateCategory(id, updateReq);
 
-//        if(updateResp == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-
         return ResponseEntity.ok(updateResp);
     }
 
@@ -66,7 +58,7 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PatchMapping("/soft-delete/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> softDelete(@PathVariable Long id) {
 
         cs.softDelete(id);
