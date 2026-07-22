@@ -16,7 +16,7 @@ public interface CategoryService {
 
     CategoryResponseDto getCategoryById(Long id);
 
-    Page<CategoryResponseDto> getAllCategory(int page, int size);;
+    Page<CategoryResponseDto> getAllCategory(int page, int size, String sort);
 
     CategoryResponseDto updateCategory(Long id,UpdateCategoryRequestDto updateRequestDto);
 

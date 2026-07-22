@@ -39,8 +39,9 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<Page<CategoryResponseDto>> getAllCategories( @RequestParam(defaultValue = "0") int page,
-                                                                       @RequestParam(defaultValue = "3") int size) {
-        return ResponseEntity.ok(cs.getAllCategory(page, size));
+                                                                       @RequestParam(defaultValue = "3") int size,
+                                                                       @RequestParam(defaultValue = "asc") String sort) {
+        return ResponseEntity.ok(cs.getAllCategory(page, size, sort));
     }
 
     @PutMapping("/{id}")

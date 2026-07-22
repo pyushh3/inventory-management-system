@@ -13,6 +13,7 @@ import com.clothing.inventory.category.service.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -67,9 +68,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     //get all categories
     @Override
-    public Page<CategoryResponseDto> getAllCategory(int page, int size) {
+    public Page<CategoryResponseDto> getAllCategory(int page, int size, String sortDirection) {
 
-        Pageable pageable = PageRequest.of(page, size);
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by("createdAt").ascending()
+                : Sort.by("createdAt").descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<Category> categoryPage = cr.findByDeletedFalse(pageable);
 
