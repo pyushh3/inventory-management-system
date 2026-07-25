@@ -50,6 +50,15 @@ public class GlobalExceptionHandller {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrorResp); // response code 400
     }
 
+    @ExceptionHandler(InsufficientStockException.class)
+    public ResponseEntity<String> handleInsufficientStock(
+            InsufficientStockException ex) {
+
+        return ResponseEntity
+                .badRequest()
+                .body(ex.getMessage());
+    }
+
     @ExceptionHandler(RuntimeException.class)
     ResponseEntity<ErrorResponceDto> handleRuntimeException(RuntimeException e, HttpServletRequest request) {
 

@@ -3,6 +3,7 @@ package com.clothing.inventory.product.mapper;
 import com.clothing.inventory.product.dto.ProductRequestDto;
 import com.clothing.inventory.product.dto.ProductResponseDto;
 import com.clothing.inventory.product.entity.Product;
+import com.clothing.inventory.stock.enums.StockStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -48,6 +49,8 @@ public class ProductMapper {
         dto.setCreatedAt(product.getCreatedAt());
         dto.setUpdatedAt(product.getUpdatedAt());
 
+        dto.setStockStatus(getStockStatus(product.getQuantity()));
+
         return dto;
     }
 
@@ -62,6 +65,19 @@ public class ProductMapper {
         product.setMaterial(dto.getMaterial());
         product.setGender(dto.getGender());
 
+    }
+
+    private StockStatus getStockStatus(Integer quantity) {
+
+        if (quantity == 0) {
+            return StockStatus.OUT_OF_STOCK;
+        }
+
+        if (quantity <= 5) {
+            return StockStatus.LOW_STOCK;
+        }
+
+        return StockStatus.IN_STOCK;
     }
 
 

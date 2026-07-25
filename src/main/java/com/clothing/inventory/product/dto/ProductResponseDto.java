@@ -1,6 +1,7 @@
 package com.clothing.inventory.product.dto;
 
 import com.clothing.inventory.product.enums.Gender;
+import com.clothing.inventory.stock.enums.StockStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,6 +39,16 @@ public class ProductResponseDto {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private StockStatus stockStatus;
+
+    public StockStatus getStockStatus() {
+        return stockStatus;
+    }
+
+    public void setStockStatus(StockStatus stockStatus) {
+        this.stockStatus = stockStatus;
+    }
 
     public Long getId() {
         return id;
