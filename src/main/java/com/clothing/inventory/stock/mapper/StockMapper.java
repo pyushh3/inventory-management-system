@@ -20,9 +20,7 @@ public class StockMapper {
         return movement;
     }
 
-    public StockResponseDto toResponse(
-            Stock movement,
-            Integer currentQuantity) {
+    public StockResponseDto toResponse(Stock movement) {
 
         StockResponseDto response =
                 new StockResponseDto();

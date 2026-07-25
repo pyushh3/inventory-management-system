@@ -49,6 +49,14 @@ public class StockController {
         );
     }
 
+    @GetMapping("/history")
+    public ResponseEntity<List<StockResponseDto>> getAllStockHistory() {
+
+        return ResponseEntity.ok(
+                stockService.getAllStockHistory()
+        );
+    }
+
     @GetMapping("/low-stock")
     public ResponseEntity<List<LowStockResponseDto>> getLowStockProducts() {
 

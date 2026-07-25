@@ -17,4 +17,6 @@ public interface StockService {
     List<StockResponseDto> getStockHistory(Long productId);
 
     List<LowStockResponseDto> getLowStockProducts();
+
+    List<StockResponseDto> getAllStockHistory();
 }

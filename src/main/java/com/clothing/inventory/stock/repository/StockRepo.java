@@ -9,4 +9,6 @@ public interface StockRepo extends JpaRepository<Stock, Long> {
 
     List<Stock> findByProductIdOrderByCreatedAtDesc(Long productId);
 
+    List<Stock> findAllByOrderByCreatedAtDesc();
+
 }

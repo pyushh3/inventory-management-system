@@ -66,8 +66,7 @@ public class StockServiceImpl implements StockService {
 
         // Entity → Response DTO
         return stockMapper.toResponse(
-                savedStock,
-                product.getQuantity()
+                savedStock
         );
     }
     @Transactional
@@ -105,8 +104,7 @@ public class StockServiceImpl implements StockService {
 
         // 7. Convert Entity → Response DTO
         return stockMapper.toResponse(
-                savedMovement,
-                product.getQuantity()
+                savedMovement
         );
     }
 
@@ -124,10 +122,19 @@ public class StockServiceImpl implements StockService {
         return stocks.stream()
                 .map(stock ->
                         stockMapper.toResponse(
-                                stock,
-                                product.getQuantity()
+                                stock
                         )
                 )
+                .toList();
+    }
+
+    @Override
+    public List<StockResponseDto> getAllStockHistory() {
+
+        return stockRepo
+                .findAllByOrderByCreatedAtDesc()
+                .stream()
+                .map(stockMapper::toResponse)
                 .toList();
     }
 
