@@ -13,7 +13,7 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
     Optional<Category> findByIdAndDeletedFalse(Long id);
     Page<Category> findByDeletedFalse(Pageable pageable);
 
-    boolean existsByNameIgnoreCase(String name);
+    boolean existsByNameIgnoreCaseAndDeletedFalse(String name);
 
     List<Category>findByDeletedFalseAndNameContainingIgnoreCase(String name);
 

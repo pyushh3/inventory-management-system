@@ -17,6 +17,6 @@ public interface BrandRepo extends JpaRepository<Brand, Long> {
 
     List<Brand> findByDeletedFalseAndNameContainingIgnoreCase(String name);
 
-    boolean existsByNameIgnoreCase(String name);
+    boolean existsByNameIgnoreCaseAndDeletedFalse(String name);
 
 }

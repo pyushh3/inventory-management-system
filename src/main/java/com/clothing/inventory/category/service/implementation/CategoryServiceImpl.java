@@ -147,6 +147,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     //helper method
     public boolean nameExist(String name) {
-        return cr.existsByNameIgnoreCase(name);
+        return cr.existsByNameIgnoreCaseAndDeletedFalse(name);
     }
 }

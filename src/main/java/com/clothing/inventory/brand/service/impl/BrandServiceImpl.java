@@ -98,6 +98,6 @@ public class BrandServiceImpl implements BrandService {
     }
 
     public boolean nameExist(String name) {
-        return br.existsByNameIgnoreCase(name);
+        return br.existsByNameIgnoreCaseAndDeletedFalse(name);
     }
 }
