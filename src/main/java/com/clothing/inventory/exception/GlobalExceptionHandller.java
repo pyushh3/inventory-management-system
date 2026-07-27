@@ -59,6 +59,15 @@ public class GlobalExceptionHandller {
                 .body(ex.getMessage());
     }
 
+    @ExceptionHandler(InvalidPurchaseStateException.class)
+    public ResponseEntity<String> handleInvalidPurchaseState(
+            InvalidPurchaseStateException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
+
     @ExceptionHandler(RuntimeException.class)
     ResponseEntity<ErrorResponceDto> handleRuntimeException(RuntimeException e, HttpServletRequest request) {
 

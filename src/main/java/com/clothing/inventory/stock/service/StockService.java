@@ -1,6 +1,7 @@
 package com.clothing.inventory.stock.service;
 
 import com.clothing.inventory.product.dto.ProductResponseDto;
+import com.clothing.inventory.product.entity.Product;
 import com.clothing.inventory.stock.dto.LowStockResponseDto;
 import com.clothing.inventory.stock.dto.StockRequestDto;
 import com.clothing.inventory.stock.dto.StockResponseDto;
@@ -19,4 +20,6 @@ public interface StockService {
     List<LowStockResponseDto> getLowStockProducts();
 
     List<StockResponseDto> getAllStockHistory();
+
+    void stockInFromPurchase(Product product, Integer quantity);
 }

@@ -11,6 +11,7 @@ import com.clothing.inventory.stock.dto.StockRequestDto;
 import com.clothing.inventory.stock.dto.StockResponseDto;
 import com.clothing.inventory.stock.entity.Stock;
 import com.clothing.inventory.stock.enums.StockMovementType;
+import com.clothing.inventory.stock.enums.StockReason;
 import com.clothing.inventory.stock.mapper.StockMapper;
 import com.clothing.inventory.stock.repository.StockRepo;
 import com.clothing.inventory.stock.service.StockService;
@@ -68,6 +69,28 @@ public class StockServiceImpl implements StockService {
         return stockMapper.toResponse(
                 savedStock
         );
+    }
+
+    @Override
+    @Transactional
+    public void stockInFromPurchase(Product product, Integer quantity) {
+
+        // Increase product quantity
+        product.setQuantity(
+                product.getQuantity() + quantity
+        );
+
+        productRepo.save(product);
+
+        // Create stock history
+        Stock stock = new Stock();
+
+        stock.setProduct(product);
+        stock.setQuantity(quantity);
+        stock.setType(StockMovementType.STOCK_IN);
+        stock.setReason(StockReason.NEW_SHIPMENT);
+
+        stockRepo.save(stock);
     }
     @Transactional
     public StockResponseDto stockOut(StockRequestDto requestDto) {
