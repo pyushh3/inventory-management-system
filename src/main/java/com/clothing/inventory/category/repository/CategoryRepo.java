@@ -21,4 +21,6 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
             CategoryStatus status,
             Pageable pageable
     );
+
+    long countByDeletedFalse();
 }

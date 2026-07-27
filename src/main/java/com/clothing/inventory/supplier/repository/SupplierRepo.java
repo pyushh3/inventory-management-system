@@ -20,5 +20,7 @@ public interface SupplierRepo extends JpaRepository<Supplier, Long> {
             String name,
             Pageable pageable
     );
+
+    long countByDeletedFalse();
 }
 

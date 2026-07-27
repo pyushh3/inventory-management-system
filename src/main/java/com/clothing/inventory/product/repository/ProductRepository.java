@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,24 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     Page<Product> findByDeletedFalse(Pageable pageable);
 
     List<Product> findByQuantityLessThanEqualAndDeletedFalse(Integer quantity);
+
+    // Dashboard: total number of products
+    long countByDeletedFalse();
+
+
+    // Dashboard: total quantity of all products
+    @Query("""
+        SELECT COALESCE(SUM(p.quantity), 0)
+        FROM Product p
+        WHERE p.deleted = false
+    """)
+    Long getTotalStock();
+
+
+    // Dashboard: products having quantity below 10
+    List<Product> findByDeletedFalseAndQuantityLessThanOrderByQuantityAsc(
+            Integer quantity
+    );
 
 
 }
